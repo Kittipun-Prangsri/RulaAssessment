@@ -155,6 +155,10 @@ export default function App() {
           </div>
         )}
       </main>
+
+      <footer className="app-footer-bar">
+        <p>สร้างโดย Kittipun Prangsri. 2026</p>
+      </footer>
     </div>
   );
 }

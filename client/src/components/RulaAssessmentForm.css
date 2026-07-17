@@ -755,3 +755,13 @@
   background-color: #fee2e2 !important;
 }
 
+.app-footer-bar {
+  text-align: center;
+  padding: 24px 16px;
+  margin-top: 40px;
+  border-top: 1px solid #e2e8f0;
+  color: #64748b;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
