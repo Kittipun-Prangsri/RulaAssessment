@@ -113,27 +113,29 @@ export default function App() {
 
   return (
     <div className="app-container">
-      {/* แท็บเมนูหลัก */}
-      <nav className="app-nav">
-        <div 
-          className={`nav-tab ${activeTab === 'dashboard' ? 'active' : ''}`}
-          onClick={() => setActiveTab('dashboard')}
-        >
-          📊 แดชบอร์ด
+      <header className="app-header">
+        <div className="app-header-inner">
+          <button className="app-brand" onClick={() => setActiveTab('dashboard')} aria-label="ไปยังแดชบอร์ด">
+            <span className="app-brand-mark"><img src="/rula-logo.png" alt="" /></span>
+            <span><strong>RULA</strong><small>Assessment System</small></span>
+          </button>
+
+          <nav className="app-nav" aria-label="เมนูหลัก">
+            <button className={`nav-tab ${activeTab === 'dashboard' ? 'active' : ''}`} onClick={() => setActiveTab('dashboard')}>
+              <span className="nav-icon" aria-hidden="true">▦</span>แดชบอร์ด
+            </button>
+            <button className={`nav-tab ${activeTab === 'form' ? 'active' : ''}`} onClick={() => setActiveTab('form')}>
+              <span className="nav-icon" aria-hidden="true">＋</span>ทำประเมิน
+            </button>
+          </nav>
+
+          <div className="header-account">
+            <div className="account-avatar" aria-hidden="true">{(session.user.email || 'U').slice(0, 1).toUpperCase()}</div>
+            <div className="account-name"><span>ผู้ใช้งาน</span><b>{session.user.email}</b></div>
+            <button className="logout-btn" onClick={handleLogout} title="ออกจากระบบ" aria-label="ออกจากระบบ">↗</button>
+          </div>
         </div>
-        <div 
-          className={`nav-tab ${activeTab === 'form' ? 'active' : ''}`}
-          onClick={() => setActiveTab('form')}
-        >
-          📝 ทำแบบประเมิน
-        </div>
-        <div 
-          className="nav-tab logout-btn"
-          onClick={handleLogout}
-        >
-          🚪 ออกจากระบบ
-        </div>
-      </nav>
+      </header>
 
       {/* ควบคุมการแสดงผลตามแท็บ */}
       <main className="app-main">
@@ -156,8 +158,21 @@ export default function App() {
         )}
       </main>
 
-      <footer className="app-footer-bar">
-        <p>สร้างโดย Kittipun Prangsri. 2026</p>
+      <footer className="app-footer">
+        <div className="footer-inner">
+          <div className="footer-brand">
+            <span className="footer-mark"><img src="/rula-logo.png" alt="" /></span>
+            <div>
+              <strong>RULA Assessment System</strong>
+              <span>ระบบสนับสนุนการประเมินท่าทางการทำงาน</span>
+            </div>
+          </div>
+          <div className="footer-meta">
+            <span>© {new Date().getFullYear()} RULA Assessment System</span>
+            <span className="footer-divider" aria-hidden="true" />
+            <span>สร้างโดย <b>Kittipun Prangsri</b></span>
+          </div>
+        </div>
       </footer>
     </div>
   );

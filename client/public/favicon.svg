@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <linearGradient id="rula-gradient" x1="10" y1="6" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#168b7c"/>
+      <stop offset="1" stop-color="#0b5f56"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="16" fill="url(#rula-gradient)"/>
+  <path d="M20 47V17h13.2c8.4 0 13.2 4.1 13.2 10.7 0 4.6-2.3 8-6.5 9.7L48 47h-9.6l-6.8-8.1h-3.1V47H20Zm8.5-15.1h4c3.1 0 5-1.5 5-4.1 0-2.7-1.9-4.1-5-4.1h-4v8.2Z" fill="#fff"/>
+  <path d="M47.8 13.6c4.2 3.2 6.7 8.2 6.7 13.6" fill="none" stroke="#a5f3df" stroke-width="3.2" stroke-linecap="round"/>
+  <circle cx="50.7" cy="12.6" r="2.7" fill="#f5bf58"/>
+</svg>
