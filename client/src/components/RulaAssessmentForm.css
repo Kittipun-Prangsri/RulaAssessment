@@ -597,12 +597,12 @@
 .assessment-hero { display:flex; justify-content:space-between; align-items:center; gap:30px; padding:29px 32px; border-radius:18px; background:linear-gradient(115deg,#13463f,#0f766e); color:#fff; box-shadow:0 14px 28px rgba(17,91,81,.14); margin-bottom:18px; }
 .assessment-eyebrow { color:#a9e6da; font-size:.72rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; display:flex; gap:8px; align-items:center; }.assessment-eyebrow span { width:7px; height:7px; border-radius:50%; background:#9bf4d9; box-shadow:0 0 0 4px rgba(155,244,217,.14); }.assessment-hero h2 { margin:9px 0 4px; font:600 1.75rem 'Kanit',sans-serif; letter-spacing:-.01em; }.assessment-hero p { max-width:615px; margin:0; color:#ccebe5; font-size:.9rem; line-height:1.55; }
 .assessment-completion { flex:0 0 172px; padding:15px 16px; border:1px solid rgba(210,255,245,.22); border-radius:12px; background:rgba(4,55,50,.18); }.assessment-completion > span { display:block; color:#bce5dc; font-size:.73rem; }.assessment-completion strong { display:block; margin:2px 0 8px; font:600 1.6rem 'Kanit',sans-serif; }.assessment-completion strong small { font:400 .8rem 'Sarabun',sans-serif; color:#bce5dc; margin-left:2px; }.assessment-completion > div { height:5px; overflow:hidden; border-radius:5px; background:rgba(233,255,250,.22); }.assessment-completion i { display:block; height:100%; border-radius:inherit; background:#91efd5; transition:width .25s ease; }
-.assessment-block { background:#fff; border:1px solid #d9e8e4; border-radius:14px; padding:22px; box-shadow:0 7px 20px rgba(26,75,67,.045); }.assessment-block.rula-meta { grid-template-columns:1fr 1fr; gap:18px; margin-bottom:18px; }.assessment-block-title { grid-column:1/-1; display:flex; gap:12px; align-items:flex-start; margin-bottom:2px; }.assessment-block-title > span { display:grid; place-items:center; width:32px; height:32px; border-radius:9px; background:#dff3ee; color:#0f766e; font:600 .75rem 'Kanit',sans-serif; white-space:nowrap; }.assessment-block-title h3 { margin:0; color:#22453f; font:600 1.08rem 'Kanit',sans-serif; }.assessment-block-title p,.assessment-section-head p { margin:1px 0 0; color:#78928b; font-size:.78rem; }
+.assessment-block { background:#fff; border:1px solid #d9e8e4; border-radius:14px; padding:22px; box-shadow:0 7px 20px rgba(26,75,67,.045); }.assessment-block.rula-meta { display:block; margin-bottom:18px; }.assessment-block-title { display:flex; gap:12px; align-items:center; margin-bottom:18px; }.assessment-block-title > span { display:grid; place-items:center; width:38px; height:38px; flex:0 0 38px; border-radius:10px; background:#dff3ee; color:#0f766e; font:600 .76rem 'Kanit',sans-serif; white-space:nowrap; }.assessment-block-title h3 { margin:0; color:#22453f; font:600 1.08rem 'Kanit',sans-serif; }.assessment-block-title p,.assessment-section-head p { margin:1px 0 0; color:#78928b; font-size:.78rem; }.assessment-meta-fields { display:grid; grid-template-columns:1fr 1fr; gap:22px; align-items:start; }.assessment-meta-fields .rula-field { margin:0; }.assessment-meta-fields select,.assessment-meta-fields textarea { box-sizing:border-box; min-height:82px; margin:0; padding:14px 16px; border-color:#cedbd8; background:#fff; font-size:.95rem; }.assessment-meta-fields select { height:82px; }.assessment-meta-fields textarea { resize:vertical; line-height:1.45; }
 .rula-side-card,.rula-common-card { background:#fff; border:1px solid #d9e8e4; border-radius:14px; padding:22px; box-shadow:0 7px 20px rgba(26,75,67,.045); }.rula-side-card { margin-bottom:0; }.assessment-section-head { display:flex; align-items:flex-start; justify-content:space-between; gap:15px; margin-bottom:18px; }.assessment-section-index { display:block; margin-bottom:3px; color:#6d9088; font-size:.7rem; text-transform:uppercase; font-weight:700; letter-spacing:.05em; }.rula-side-title { margin:0; color:#1f5149; font-size:1.07rem; }.section-progress { min-width:33px; padding:4px 7px; border-radius:7px; background:#edf3f1; color:#78918b; text-align:center; font:600 .76rem 'Kanit',sans-serif; }.section-progress.is-complete { background:#dcf4e9; color:#158060; }
 .rula-sides { gap:18px; margin-bottom:18px; }.rula-field-row { background:#fbfdfc; border-color:#e0ece9; border-radius:10px; margin-bottom:14px; padding:11px 13px; }.rula-field-label { color:#31534d; font-size:.88rem; }.rula-field-label--sub { color:#708b84; }.rula-option { border-color:#dce8e5; color:#45625b; font-size:.86rem; }.rula-option:hover { border-color:#58a797; background:#f3fbf9; }.rula-option.is-selected { color:#145f55; border-color:#269381; background:#e5f7f1; }.rula-option--adjust.is-selected { color:#985819; border-color:#e3a655; background:#fff5df; }.rula-visualizer-box { border-color:#dbeae6; box-shadow:none; }.visualizer-status { color:#1b776b; }
 .rula-common-card { margin-bottom:18px; }.rula-preview { margin:22px 0; padding:22px; border:1px solid #cfe7e1; border-radius:15px; background:linear-gradient(120deg,#f3fbf9,#fbfefd); }.preview-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; margin-bottom:14px; }.preview-heading > div > span { display:block; color:#268275; text-transform:uppercase; letter-spacing:.08em; font-size:.69rem; font-weight:700; }.preview-heading p { max-width:390px; margin:0; color:#718b85; text-align:right; font-size:.76rem; line-height:1.45; }.rula-score-card { background:#fff; border-width:1px; box-shadow:0 5px 14px rgba(35,89,79,.05); }.rula-score-card.level-1 { border-color:#85d7b5; }.rula-score-card.level-2 { border-color:#edd274; }.rula-score-card.level-3 { border-color:#edb76e; }.rula-score-card.level-4 { border-color:#f0a29c; }
 .assessment-submit-area { display:flex; align-items:center; justify-content:space-between; gap:22px; padding:17px 18px 17px 22px; border:1px solid #d9e9e5; border-radius:13px; background:#fff; box-shadow:0 6px 18px rgba(31,80,70,.04); }.assessment-submit-area strong,.assessment-submit-area span { display:block; }.assessment-submit-area strong { color:#30534c; font-size:.9rem; }.assessment-submit-area > div > span { margin-top:3px; color:#819a94; font-size:.76rem; }.rula-submit-btn { width:auto; min-width:218px; display:inline-flex; align-items:center; justify-content:center; gap:13px; padding:12px 17px; border-radius:9px; background:#107568; box-shadow:0 5px 12px rgba(15,118,110,.18); }.rula-submit-btn span { font-size:1.15rem; line-height:1; }.rula-submit-btn:hover:not(:disabled) { background:#0b6258; }.rula-submit-btn:disabled { background:#aebfbb; box-shadow:none; }
-@media (max-width: 720px) { .assessment-hero { padding:24px 20px; display:block; }.assessment-completion { margin-top:20px; max-width:230px; }.assessment-block.rula-meta { grid-template-columns:1fr; }.rula-sides { grid-template-columns:1fr; }.preview-heading,.assessment-submit-area { display:block; }.preview-heading p { margin-top:8px; text-align:left; }.assessment-submit-area .rula-submit-btn { width:100%; margin-top:14px; }.rula-form { padding:16px 13px 48px; } }
+@media (max-width: 720px) { .assessment-hero { padding:24px 20px; display:block; }.assessment-completion { margin-top:20px; max-width:230px; }.assessment-meta-fields { grid-template-columns:1fr; gap:15px; }.rula-sides { grid-template-columns:1fr; }.preview-heading,.assessment-submit-area { display:block; }.preview-heading p { margin-top:8px; text-align:left; }.assessment-submit-area .rula-submit-btn { width:100%; margin-top:14px; }.rula-form { padding:16px 13px 48px; } }
 
 /* Application footer */
 .app-footer { margin-top: auto; border-top: 1px solid #dce9e6; background: #fff; color: #66817b; font-family: 'Sarabun', sans-serif; }
@@ -746,8 +746,137 @@
 /* Assessment score preview */
 .preview-button { display:inline-flex; align-items:center; gap:5px; padding:6px 8px; border:1px solid #cfe4de; border-radius:7px; color:#176e62; background:#f5fbf9; cursor:pointer; font:600 .73rem 'Sarabun',sans-serif; white-space:nowrap; transition:background .15s ease, border-color .15s ease; }.preview-button:hover { border-color:#77b8aa; background:#e7f6f1; }
 .score-preview-backdrop { position:fixed; z-index:50; inset:0; padding:20px; display:grid; place-items:center; background:rgba(18,46,41,.44); backdrop-filter:blur(4px); }.score-preview-modal { position:relative; width:min(100%,650px); max-height:calc(100vh - 40px); overflow:auto; padding:28px; border:1px solid #d3e6e1; border-radius:18px; background:#fff; box-shadow:0 24px 60px rgba(8,42,35,.24); color:#26463f; }.preview-close { position:absolute; top:15px; right:15px; display:grid; place-items:center; width:32px; height:32px; border:0; border-radius:8px; color:#66837c; background:#f1f6f5; cursor:pointer; }.preview-close:hover { color:#245a51; background:#e4f1ee; }.preview-kicker { color:#218071; font-size:.7rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }.score-preview-modal h2 { margin:6px 36px 1px 0; color:#1f4941; font:600 1.45rem 'Kanit',sans-serif; }.preview-task { margin:0; color:#78918b; font-size:.82rem; }.preview-risk-banner { margin:20px 0 16px; padding:12px 14px; border-radius:10px; }.preview-risk-banner span,.preview-risk-banner b,.preview-risk-banner small { display:block; }.preview-risk-banner span { font-size:.71rem; font-weight:600; opacity:.8; }.preview-risk-banner b { margin:2px 0; font:600 1rem 'Kanit',sans-serif; }.preview-risk-banner small { font-size:.75rem; }.preview-risk--mint { color:#176948; background:#e6f7ef; }.preview-risk--yellow { color:#8d6808; background:#fff6d9; }.preview-risk--orange { color:#a6561b; background:#fff0e1; }.preview-risk--red { color:#ac4641; background:#fdeae8; }.preview-score-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }.preview-side-card { min-height:155px; padding:16px; border:1px solid #e1ece9; border-radius:12px; background:#fbfefd; }.preview-side-card > div { display:grid; grid-template-columns:1fr auto; align-items:end; }.preview-side-card span { display:block; color:#67827a; font-size:.78rem; font-weight:600; }.preview-side-card strong { grid-row:span 2; color:#24675d; font:600 2.35rem/1 'Kanit',sans-serif; }.preview-side-card small { color:#849c97; font-size:.68rem; }.preview-side-card dl { display:grid; grid-template-columns:1fr auto; gap:5px 12px; margin:15px 0 0; padding-top:11px; border-top:1px solid #e8f0ee; font-size:.75rem; }.preview-side-card dt { color:#79928c; }.preview-side-card dd { margin:0; color:#375850; font-weight:700; }.preview-side--3 { border-top:3px solid #df7c35; }.preview-side--4 { border-top:3px solid #d75a53; }.preview-footnote { margin:16px 0 0; color:#809893; text-align:right; font-size:.72rem; }
+.preview-actions { display:flex; justify-content:flex-end; margin-top:18px; padding-top:14px; border-top:1px solid #e7f0ed; }.preview-actions button { padding:9px 14px; border:0; border-radius:8px; color:#fff; background:#11776a; box-shadow:0 4px 10px rgba(15,118,110,.17); cursor:pointer; font:600 .8rem 'Sarabun',sans-serif; }.preview-actions button:hover:not(:disabled) { background:#0b655a; }.preview-actions button:disabled { opacity:.65; cursor:wait; }
 @media (max-width: 600px) { .preview-score-grid { grid-template-columns:1fr; }.score-preview-modal { padding:23px 18px; }.assessment-table th:last-child,.assessment-table td:last-child { display:table-cell; padding-left:5px; padding-right:10px; }.preview-button { font-size:0; padding:7px; }.preview-button svg { width:17px; height:17px; } }
 
 /* Add assessee workflow */
+.assessment-meta-fields select,
+.assessment-meta-fields textarea {
+  box-sizing: border-box;
+  width: 100%;
+  height: 82px;
+  min-height: 82px;
+  margin: 0;
+  padding: 14px 16px;
+  border-color: #cedbd8;
+  background: #fff;
+  font-size: .95rem;
+  vertical-align: top;
+}
+
+.assessment-meta-fields select { line-height: 1.4; }
+
+.assessment-meta-fields textarea {
+  display: block;
+  resize: none;
+  line-height: 1.45;
+  overflow: auto;
+}
+
+.assessment-meta-fields textarea::placeholder {
+  color: #94a6a2;
+  opacity: 1;
+}
+
+/* Compact assessment details */
+.assessment-block.rula-meta {
+  padding: 18px;
+}
+
+.assessment-block.rula-meta .assessment-block-title {
+  gap: 9px;
+  margin-bottom: 14px;
+}
+
+.assessment-block.rula-meta .assessment-block-title > span {
+  width: 32px;
+  height: 32px;
+  flex-basis: 32px;
+  border-radius: 8px;
+  font-size: .7rem;
+}
+
+.assessment-block.rula-meta .assessment-block-title h3 {
+  font-size: 1rem;
+}
+
+.assessment-block.rula-meta .assessment-meta-fields {
+  gap: 16px;
+}
+
+.assessment-meta-fields select,
+.assessment-meta-fields input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  min-height: 48px;
+  margin: 0;
+  padding: 10px 13px;
+  border: 1px solid #cedbd8;
+  border-radius: 8px;
+  background: #fff;
+  color: #274940;
+  font: 400 .92rem 'Sarabun', sans-serif;
+}
+
+.assessment-meta-fields input::placeholder {
+  color: #94a6a2;
+  opacity: 1;
+}
+
+.assessment-meta-fields select:focus,
+.assessment-meta-fields input:focus {
+  outline: 0;
+  border-color: #2b9586;
+  box-shadow: 0 0 0 3px rgba(39, 144, 129, .11);
+}
+
+.assessment-meta-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.assessment-block.rula-meta .assessment-meta-header .assessment-block-title {
+  margin-bottom: 14px;
+}
+
+.assessment-meta-header .add-assessee-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  min-height: 38px;
+  padding: 8px 12px 8px 9px;
+  border: 1px solid #11776a;
+  border-radius: 8px;
+  color: #fff;
+  background: #11776a;
+  box-shadow: 0 4px 10px rgba(15, 118, 110, .16);
+  font: 600 .8rem 'Sarabun', sans-serif;
+}
+
+.assessment-meta-header .add-assessee-button:hover {
+  color: #fff;
+  background: #0b665b;
+}
+
+.assessment-meta-header .add-assessee-button b {
+  display: grid;
+  width: 19px;
+  height: 19px;
+  place-items: center;
+  border-radius: 50%;
+  color: #0f766e;
+  background: #dff7f0;
+  font: 600 1rem/1 'Sarabun', sans-serif;
+}
+
+@media (max-width: 520px) {
+  .assessment-meta-header { display: block; }
+  .assessment-meta-header .add-assessee-button { width: 100%; justify-content: center; margin: 0 0 14px; }
+}
+
 .assessee-label-row { display:flex; justify-content:space-between; align-items:center; gap:12px; }.assessee-label-row .rula-field-label { margin-bottom:8px; }.add-assessee-button { padding:3px 7px; border:0; border-radius:6px; color:#147568; background:transparent; cursor:pointer; font:600 .76rem 'Sarabun',sans-serif; }.add-assessee-button:hover { background:#e7f5f1; }
 .assessee-modal-backdrop { position:fixed; z-index:60; inset:0; display:grid; place-items:center; padding:18px; background:rgba(18,46,41,.45); backdrop-filter:blur(4px); }.assessee-modal { position:relative; width:min(100%,440px); padding:27px; border:1px solid #d4e7e2; border-radius:17px; background:#fff; box-shadow:0 24px 60px rgba(8,42,35,.25); color:#294b44; }.assessee-modal-close { position:absolute; top:14px; right:14px; width:30px; height:30px; border:0; border-radius:8px; color:#66827c; background:#f1f6f5; cursor:pointer; font-size:1.2rem; line-height:1; }.modal-kicker { color:#208171; font-size:.69rem; font-weight:700; letter-spacing:.09em; text-transform:uppercase; }.assessee-modal h3 { margin:5px 0 2px; font:600 1.35rem 'Kanit',sans-serif; }.assessee-modal > p { margin:0 0 17px; color:#7a938d; font-size:.79rem; line-height:1.5; }.assessee-modal label { display:block; margin-top:12px; color:#47665f; font-size:.8rem; font-weight:600; }.assessee-modal label b { color:#cc574f; }.assessee-modal input { box-sizing:border-box; width:100%; margin-top:6px; padding:10px 11px; border:1px solid #d9e6e3; border-radius:8px; outline:0; color:#25473f; font:400 .9rem 'Sarabun',sans-serif; }.assessee-modal input:focus { border-color:#399a8c; box-shadow:0 0 0 3px rgba(41,147,133,.12); }.assessee-modal-error { margin:12px 0 0 !important; padding:8px 10px; border-radius:7px; color:#af4640 !important; background:#fdebea; font-size:.77rem !important; }.assessee-modal-actions { display:flex; justify-content:flex-end; gap:8px; margin-top:21px; }.assessee-modal-actions button { padding:9px 12px; border:1px solid #d5e3e0; border-radius:8px; color:#5b756e; background:#fff; cursor:pointer; font:600 .8rem 'Sarabun',sans-serif; }.assessee-modal-actions button[type='submit'] { border-color:#11776a; color:#fff; background:#11776a; }.assessee-modal-actions button:disabled { opacity:.65; cursor:wait; }

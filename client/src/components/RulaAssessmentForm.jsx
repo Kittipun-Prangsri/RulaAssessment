@@ -325,31 +325,36 @@ export default function RulaAssessmentForm({ onSubmit, onCreateAssessee, assesse
       </header>
 
       <section className="assessment-block rula-meta">
-        <div className="assessment-block-title"><span>ส่วนที่ 1</span><div><h3>ข้อมูลการประเมิน</h3><p>ระบุบุคคลและลักษณะงานที่กำลังสังเกต</p></div></div>
-        <div className="rula-field">
-          <div className="assessee-label-row"><label className="rula-field-label" htmlFor="assessee">ผู้ถูกประเมิน</label><button type="button" className="add-assessee-button" onClick={() => { setAssesseeError(''); setShowAssesseeModal(true); }}>＋ เพิ่มผู้ถูกประเมิน</button></div>
-          <select
-            id="assessee"
-            value={assesseeId}
-            onChange={(e) => setAssesseeId(e.target.value)}
-          >
-            <option value="">-- เลือกผู้ถูกประเมิน --</option>
-            {assessees.map((a) => (
-              <option key={a.id} value={a.id}>
-                {a.full_name} {a.position ? `(${a.position})` : ''}
-              </option>
-            ))}
-          </select>
+        <div className="assessment-meta-header">
+          <div className="assessment-block-title"><span>ส่วนที่ 1</span><div><h3>ข้อมูลการประเมิน</h3><p>ระบุบุคคลและลักษณะงานที่กำลังสังเกต</p></div></div>
+          <button type="button" className="add-assessee-button" onClick={() => { setAssesseeError(''); setShowAssesseeModal(true); }}><b>＋</b> เพิ่มผู้ถูกประเมิน</button>
         </div>
-        <div className="rula-field">
-          <label className="rula-field-label" htmlFor="task">ลักษณะงานที่ประเมิน</label>
-          <textarea
-            id="task"
-            rows={2}
-            value={taskDescription}
-            onChange={(e) => setTaskDescription(e.target.value)}
-            placeholder="เช่น การยกกล่องเวชภัณฑ์ขึ้นชั้นวาง"
-          />
+        <div className="assessment-meta-fields">
+          <div className="rula-field">
+            <label className="rula-field-label" htmlFor="assessee">ผู้ถูกประเมิน</label>
+            <select
+              id="assessee"
+              value={assesseeId}
+              onChange={(e) => setAssesseeId(e.target.value)}
+            >
+              <option value="">-- เลือกผู้ถูกประเมิน --</option>
+              {assessees.map((a) => (
+                <option key={a.id} value={a.id}>
+                  {a.full_name} {a.position ? `(${a.position})` : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="rula-field">
+            <label className="rula-field-label" htmlFor="task">ลักษณะงานที่ประเมิน</label>
+            <input
+              type="text"
+              id="task"
+              value={taskDescription}
+              onChange={(e) => setTaskDescription(e.target.value)}
+              placeholder="เช่น การยกกล่องเวชภัณฑ์ขึ้นชั้นวาง"
+            />
+          </div>
         </div>
       </section>
 
@@ -450,9 +455,9 @@ export default function RulaAssessmentForm({ onSubmit, onCreateAssessee, assesse
             <span className="modal-kicker">New assessee</span>
             <h3>เพิ่มผู้ถูกประเมิน</h3>
             <p>ข้อมูลจะถูกบันทึกในแผนกเดียวกับบัญชีผู้ใช้ปัจจุบัน</p>
-            <label>ชื่อ-นามสกุล <b>*</b><input autoFocus value={newAssessee.fullName} onChange={(event) => setNewAssessee((current) => ({ ...current, fullName: event.target.value }))} placeholder="เช่น นายสมชาย ใจดี" /></label>
+            <label>ชื่อ-นามสกุล <b>*</b><input autoFocus value={newAssessee.fullName} onChange={(event) => setNewAssessee((current) => ({ ...current, fullName: event.target.value }))} placeholder="เช่น นาย" list="assessee-list" /></label>
             <label>รหัสพนักงาน<input value={newAssessee.employeeCode} onChange={(event) => setNewAssessee((current) => ({ ...current, employeeCode: event.target.value }))} placeholder="ไม่บังคับ" /></label>
-            <label>ตำแหน่งงาน<input value={newAssessee.position} onChange={(event) => setNewAssessee((current) => ({ ...current, position: event.target.value }))} placeholder="เช่น พนักงานคลังสินค้า" /></label>
+            <label>ตำแหน่งงาน<input value={newAssessee.position} onChange={(event) => setNewAssessee((current) => ({ ...current, position: event.target.value }))} placeholder="เช่น พนักงานแผนกบริการ" /></label>
             {assesseeError && <p className="assessee-modal-error">{assesseeError}</p>}
             <div className="assessee-modal-actions"><button type="button" onClick={() => setShowAssesseeModal(false)} disabled={creatingAssessee}>ยกเลิก</button><button type="submit" disabled={creatingAssessee}>{creatingAssessee ? 'กำลังบันทึก...' : 'บันทึกผู้ถูกประเมิน'}</button></div>
           </form>

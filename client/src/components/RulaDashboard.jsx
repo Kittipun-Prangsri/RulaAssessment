@@ -145,6 +145,16 @@ function AssessmentPreview({ assessment, onClose }) {
   const right = assessment.assessment_sides?.find((side) => side.side === 'right');
   const left = assessment.assessment_sides?.find((side) => side.side === 'left');
   const level = getHighestLevel(assessment);
+  const [exporting, setExporting] = useState(false);
+
+  const handleExport = async () => {
+    setExporting(true);
+    try {
+      await exportAssessmentPdf(assessment, right, left, level);
+    } finally {
+      setExporting(false);
+    }
+  };
 
   return <div className="score-preview-backdrop" role="presentation" onMouseDown={onClose}>
     <section className="score-preview-modal" role="dialog" aria-modal="true" aria-labelledby="score-preview-title" onMouseDown={(event) => event.stopPropagation()}>
@@ -155,6 +165,7 @@ function AssessmentPreview({ assessment, onClose }) {
       <div className={`preview-risk-banner preview-risk--${RISK[level].color}`}><span>ระดับความเสี่ยงสูงสุด</span><b>ระดับ {level} · {RISK[level].label}</b><small>{RISK[level].detail}</small></div>
       <div className="preview-score-grid"><PreviewSide label="ฝั่งขวา" side={right} /><PreviewSide label="ฝั่งซ้าย" side={left} /></div>
       <p className="preview-footnote">ประเมินเมื่อ {assessment.assessed_at ? new Intl.DateTimeFormat('th-TH', { dateStyle: 'long' }).format(new Date(assessment.assessed_at)) : 'ไม่ระบุวันที่'}</p>
+      <div className="preview-actions"><button onClick={handleExport} disabled={exporting}>{exporting ? 'กำลังสร้าง PDF...' : 'ส่งออก PDF'}</button></div>
     </section>
   </div>;
 }
@@ -165,4 +176,41 @@ function PreviewSide({ label, side }) {
     <div><span>{label}</span><strong>{side.final_score}</strong><small>RULA score</small></div>
     <dl><dt>ตาราง A</dt><dd>{side.table_a_score ?? '–'}</dd><dt>แขน/ข้อมือ</dt><dd>{side.wrist_arm_score ?? '–'}</dd><dt>ตาราง B</dt><dd>{side.table_b_score ?? '–'}</dd><dt>คอ/ลำตัว/ขา</dt><dd>{side.neck_trunk_leg_score ?? '–'}</dd></dl>
   </div>;
+}
+
+const escapeHtml = (value) => String(value ?? '–').replace(/[&<>'"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[char]));
+
+function createPdfSide(label, side) {
+  if (!side) return `<section class="side"><h3>${label}</h3><p>ไม่มีข้อมูลคะแนน</p></section>`;
+  return `<section class="side level-${side.action_level}"><div class="side-header"><span>${label}</span><strong>${side.final_score}</strong></div><small>RULA score · ระดับ ${side.action_level}</small><table><tbody><tr><td>ตาราง A</td><td>${side.table_a_score ?? '–'}</td></tr><tr><td>แขน/ข้อมือ</td><td>${side.wrist_arm_score ?? '–'}</td></tr><tr><td>ตาราง B</td><td>${side.table_b_score ?? '–'}</td></tr><tr><td>คอ/ลำตัว/ขา</td><td>${side.neck_trunk_leg_score ?? '–'}</td></tr></tbody></table></section>`;
+}
+
+async function exportAssessmentPdf(assessment, right, left, level) {
+  const { jsPDF } = await import('jspdf');
+  return new Promise((resolve, reject) => {
+    const report = document.createElement('div');
+    const name = assessment.assessees?.full_name || 'ไม่ระบุชื่อ';
+    const date = assessment.assessed_at ? new Intl.DateTimeFormat('th-TH', { dateStyle: 'long' }).format(new Date(assessment.assessed_at)) : 'ไม่ระบุวันที่';
+    const safeName = name.replace(/[\\/:*?"<>|]/g, '-');
+    report.style.cssText = 'position:fixed;left:-10000px;top:0;width:720px;padding:28px;background:#fff;color:#173f38;font-family:Sarabun,Arial,sans-serif;';
+    report.innerHTML = `<style>h1,h2,h3,strong{font-family:Kanit,Sarabun,Arial,sans-serif}h1{font-size:27px;margin:0;color:#0f766e}.eyebrow{font-size:11px;font-weight:700;letter-spacing:1px;color:#277e71;text-transform:uppercase}.person{padding:18px 0 15px;border-bottom:1px solid #cfe4de}.person h2{font-size:22px;margin:4px 0}.person p{margin:3px 0;color:#617e77}.risk{margin:18px 0;padding:13px 15px;border-radius:9px;background:#fff0e1;color:#a6561b}.risk b{display:block;font-size:17px}.scores{display:grid;grid-template-columns:1fr 1fr;gap:14px}.side{border:1px solid #d9e9e5;border-radius:10px;padding:14px}.side-header{display:flex;align-items:center;justify-content:space-between}.side-header span{font-weight:700;font-size:15px}.side-header strong{font-size:40px;line-height:1;color:#166f63}.side small{color:#718b84}table{width:100%;margin-top:13px;border-collapse:collapse;font-size:13px}td{padding:6px 0;border-top:1px solid #edf3f1}td:last-child{text-align:right;font-weight:700}.foot{margin-top:20px;padding-top:11px;border-top:1px solid #dbe9e5;color:#6f8982;font-size:11px}</style><div class="eyebrow">RULA Assessment System</div><h1>รายงานผลการประเมิน RULA</h1><section class="person"><h2>${escapeHtml(name)}</h2><p>${escapeHtml(assessment.task_description || assessment.assessees?.position || 'ไม่ได้ระบุลักษณะงาน')}</p><p>วันที่ประเมิน: ${escapeHtml(date)}</p></section><section class="risk"><span>ระดับความเสี่ยงสูงสุด</span><b>ระดับ ${level} · ${escapeHtml(RISK[level].label)}</b><small>${escapeHtml(RISK[level].detail)}</small></section><div class="scores">${createPdfSide('ฝั่งขวา', right)}${createPdfSide('ฝั่งซ้าย', left)}</div><p class="foot">สร้างจากระบบ RULA Assessment System</p>`;
+    document.body.appendChild(report);
+    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+    pdf.html(report, {
+      x: 10,
+      y: 10,
+      width: 190,
+      windowWidth: 720,
+      autoPaging: 'text',
+      html2canvas: { scale: 0.3, useCORS: true, backgroundColor: '#ffffff' },
+      callback: (documentPdf) => {
+        document.body.removeChild(report);
+        documentPdf.save(`RULA-${safeName}.pdf`);
+        resolve();
+      },
+    }).catch((error) => {
+      if (report.parentNode) document.body.removeChild(report);
+      reject(error);
+    });
+  });
 }
