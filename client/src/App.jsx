@@ -23,6 +23,15 @@ export default function App() {
   const [saveMessage, setSaveMessage] = useState('');
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
+  const loadAssessees = async () => {
+    const { data, error } = await supabase
+      .from('assessees')
+      .select('id, full_name, position')
+      .order('full_name');
+    if (error) throw error;
+    setAssessees(data || []);
+  };
+
   // ตรวจจับสถานะการล็อกอิน
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -41,14 +50,36 @@ export default function App() {
   // โหลดรายชื่อผู้ถูกประเมินเมื่อผู้ใช้ล็อกอินสำเร็จ
   useEffect(() => {
     if (!session) return;
-    supabase
-      .from('assessees')
-      .select('id, full_name, position')
-      .order('full_name')
-      .then(({ data, error }) => {
-        if (!error) setAssessees(data || []);
-      });
+    loadAssessees().catch((error) => console.error('Cannot load assessees:', error));
   }, [session]);
+
+  const handleCreateAssessee = async ({ fullName, employeeCode, position }) => {
+    const { data: { session: currentSession } } = await supabase.auth.getSession();
+    if (!currentSession) throw new Error('กรุณาเข้าสู่ระบบก่อนเพิ่มผู้ถูกประเมิน');
+
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('department_id')
+      .eq('id', currentSession.user.id)
+      .single();
+    if (profileError) throw profileError;
+    if (!profile?.department_id) throw new Error('บัญชีผู้ใช้ยังไม่ได้กำหนดแผนก');
+
+    const { data: newAssessee, error: insertError } = await supabase
+      .from('assessees')
+      .insert({
+        full_name: fullName.trim(),
+        employee_code: employeeCode.trim() || null,
+        position: position.trim() || null,
+        department_id: profile.department_id,
+      })
+      .select('id, full_name, position')
+      .single();
+    if (insertError) throw insertError;
+
+    setAssessees((current) => [...current, newAssessee].sort((a, b) => a.full_name.localeCompare(b.full_name, 'th')));
+    return newAssessee;
+  };
 
   const handleSubmit = async (payload) => {
     setSaving(true);
@@ -151,6 +182,7 @@ export default function App() {
               assessees={assessees}
               scoreCalculator={scoreCalculator}
               onSubmit={handleSubmit}
+              onCreateAssessee={handleCreateAssessee}
             />
             {saving && <p className="status-text saving">กำลังบันทึกข้อมูล...</p>}
             {saveMessage && <p className={`status-text ${saveMessage.includes('สำเร็จ') ? 'success' : 'error'}`}>{saveMessage}</p>}

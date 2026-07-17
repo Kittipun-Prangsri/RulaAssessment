@@ -211,9 +211,13 @@ function SideForm({ side, sideLabel, state, setState }) {
   );
 }
 
-export default function RulaAssessmentForm({ onSubmit, assessees = [], scoreCalculator }) {
+export default function RulaAssessmentForm({ onSubmit, onCreateAssessee, assessees = [], scoreCalculator }) {
   const [assesseeId, setAssesseeId] = useState('');
   const [taskDescription, setTaskDescription] = useState('');
+  const [showAssesseeModal, setShowAssesseeModal] = useState(false);
+  const [newAssessee, setNewAssessee] = useState({ fullName: '', employeeCode: '', position: '' });
+  const [creatingAssessee, setCreatingAssessee] = useState(false);
+  const [assesseeError, setAssesseeError] = useState('');
 
   const [right, setRight] = useState(emptySideState());
   const [left, setLeft] = useState(emptySideState());
@@ -285,6 +289,26 @@ export default function RulaAssessmentForm({ onSubmit, assessees = [], scoreCalc
     });
   };
 
+  const handleCreateAssessee = async (event) => {
+    event.preventDefault();
+    if (!newAssessee.fullName.trim()) {
+      setAssesseeError('กรุณาระบุชื่อ-นามสกุล');
+      return;
+    }
+    setCreatingAssessee(true);
+    setAssesseeError('');
+    try {
+      const created = await onCreateAssessee(newAssessee);
+      setAssesseeId(created.id);
+      setNewAssessee({ fullName: '', employeeCode: '', position: '' });
+      setShowAssesseeModal(false);
+    } catch (error) {
+      setAssesseeError(error.message || 'ไม่สามารถเพิ่มผู้ถูกประเมินได้');
+    } finally {
+      setCreatingAssessee(false);
+    }
+  };
+
   return (
     <div className="rula-form">
       <header className="assessment-hero">
@@ -303,7 +327,7 @@ export default function RulaAssessmentForm({ onSubmit, assessees = [], scoreCalc
       <section className="assessment-block rula-meta">
         <div className="assessment-block-title"><span>ส่วนที่ 1</span><div><h3>ข้อมูลการประเมิน</h3><p>ระบุบุคคลและลักษณะงานที่กำลังสังเกต</p></div></div>
         <div className="rula-field">
-          <label className="rula-field-label" htmlFor="assessee">ผู้ถูกประเมิน</label>
+          <div className="assessee-label-row"><label className="rula-field-label" htmlFor="assessee">ผู้ถูกประเมิน</label><button type="button" className="add-assessee-button" onClick={() => { setAssesseeError(''); setShowAssesseeModal(true); }}>＋ เพิ่มผู้ถูกประเมิน</button></div>
           <select
             id="assessee"
             value={assesseeId}
@@ -418,6 +442,22 @@ export default function RulaAssessmentForm({ onSubmit, assessees = [], scoreCalc
           บันทึกผลการประเมิน <span>→</span>
         </button>
       </section>
+
+      {showAssesseeModal && (
+        <div className="assessee-modal-backdrop" onMouseDown={() => !creatingAssessee && setShowAssesseeModal(false)}>
+          <form className="assessee-modal" onSubmit={handleCreateAssessee} onMouseDown={(event) => event.stopPropagation()}>
+            <button type="button" className="assessee-modal-close" onClick={() => setShowAssesseeModal(false)} disabled={creatingAssessee} aria-label="ปิด">×</button>
+            <span className="modal-kicker">New assessee</span>
+            <h3>เพิ่มผู้ถูกประเมิน</h3>
+            <p>ข้อมูลจะถูกบันทึกในแผนกเดียวกับบัญชีผู้ใช้ปัจจุบัน</p>
+            <label>ชื่อ-นามสกุล <b>*</b><input autoFocus value={newAssessee.fullName} onChange={(event) => setNewAssessee((current) => ({ ...current, fullName: event.target.value }))} placeholder="เช่น นายสมชาย ใจดี" /></label>
+            <label>รหัสพนักงาน<input value={newAssessee.employeeCode} onChange={(event) => setNewAssessee((current) => ({ ...current, employeeCode: event.target.value }))} placeholder="ไม่บังคับ" /></label>
+            <label>ตำแหน่งงาน<input value={newAssessee.position} onChange={(event) => setNewAssessee((current) => ({ ...current, position: event.target.value }))} placeholder="เช่น พนักงานคลังสินค้า" /></label>
+            {assesseeError && <p className="assessee-modal-error">{assesseeError}</p>}
+            <div className="assessee-modal-actions"><button type="button" onClick={() => setShowAssesseeModal(false)} disabled={creatingAssessee}>ยกเลิก</button><button type="submit" disabled={creatingAssessee}>{creatingAssessee ? 'กำลังบันทึก...' : 'บันทึกผู้ถูกประเมิน'}</button></div>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
